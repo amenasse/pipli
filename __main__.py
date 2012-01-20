@@ -17,6 +17,9 @@ PIP_CACHE = o.download_cache
 dest = args.dest[0]
 verbose = args.verbose
 
+if not os.path.exists(dest):
+    os.mkdir(dest)
+
 cache_contents = os.listdir(PIP_CACHE)
 for cache_entry in cache_contents:
     filename = cache_entry.split("%2F")[-1]
