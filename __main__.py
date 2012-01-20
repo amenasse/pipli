@@ -13,8 +13,7 @@ from pip.commands.install import InstallCommand
 pip_install = InstallCommand()
 o,a = pip_install.parser.parse_args()
 PIP_CACHE = o.download_cache
-
-PYPI_DIR = '/usr/local/pypi'
+dest = args.dest[0]
 
 cache_contents = os.listdir(PIP_CACHE)
 for cache_entry in cache_contents:
@@ -24,7 +23,7 @@ for cache_entry in cache_contents:
         continue
     components = filename.split('-')[0:-1]
     pkg_name = '-'.join(components)
-    pkg_dir = os.path.join(PYPI_DIR,pkg_name)
+    pkg_dir = os.path.join(dest,pkg_name)
     pkg_path = os.path.join(pkg_dir,filename)
     if not os.path.exists(pkg_dir):
         os.mkdir(pkg_dir)
