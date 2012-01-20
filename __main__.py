@@ -2,7 +2,12 @@
 """ turn a pip cache into a pypi index.. """
 import os
 import shutil
+import argparse
 
+parser = argparse.ArgumentParser(description="turn a pip cache into a pypi index")
+parser.add_argument('dest', metavar='DEST_DIR', nargs=1,help="destination directory")
+
+args = parser.parse_args()
 from pip.commands.install import InstallCommand
 
 pip_install = InstallCommand()
