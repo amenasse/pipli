@@ -4,18 +4,22 @@ import os
 import shutil
 import argparse
 
+from pip.commands.install import InstallCommand
+pip_install = InstallCommand()
+o,a = pip_install.parser.parse_args([])
+
 parser = argparse.ArgumentParser(description="turn a pip cache into a pypi index")
 parser.add_argument('dest', metavar='DEST_DIR', nargs=1,help="destination directory")
 parser.add_argument('-v','--verbose',action='store_true',default=False,help="verbose output")
+parser.add_argument('-p','--pip-cache',default=o.download_cache)
 
 args = parser.parse_args()
-from pip.commands.install import InstallCommand
 
-pip_install = InstallCommand()
-o,a = pip_install.parser.parse_args()
-PIP_CACHE = o.download_cache
 dest = args.dest[0]
 verbose = args.verbose
+
+PIP_CACHE = args.pip_cache
+
 
 if not os.path.exists(dest):
     os.mkdir(dest)
