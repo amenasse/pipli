@@ -20,7 +20,7 @@ def main():
     dest = args.dest[0]
     verbose = args.verbose
 
-    PIP_CACHE = args.pip_cache
+    PIP_CACHE = os.path.expanduser(args.pip_cache)
 
 
     if not os.path.exists(dest):
